@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bread Cake App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff8e1;
+            color: #4a4a4a;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #ffc107;
+            padding: 1rem;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            border-bottom: 5px solid #f57c00;
+        }
+
+        .container {
+            margin: 2rem auto;
+            max-width: 900px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .role {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .role button {
+            background: #ffcc80;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .role button:hover {
+            background: #ffa726;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 0.8rem;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #ffeb3b;
+            color: #4a4a4a;
+        }
+
+        table td button {
+            background: #ff7043;
+            border: none;
+            padding: 0.3rem 0.7rem;
+            color: white;
+            font-size: 0.9rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        table td button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Bread Cake Management App</div>
+
+    <div class="container">
+        <div class="role">
+            <div><strong>Role:</strong> Admin</div>
+            <button onclick="setRole('Admin')">Pilih Role</button>
+        </div>
+
+        <div class="role">
+            <div><strong>Role:</strong> Manager</div>
+            <button onclick="setRole('Manager')">Pilih Role</button>
+        </div>
+
+        <div class="role">
+            <div><strong>Role:</strong> Customer</div>
+            <button onclick="setRole('Customer')">Pilih Role</button>
+        </div>
+
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>Nama Produk</th>
+                    <th>Harga</th>
+                    <th>Deskripsi</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Croissant</td>
+                    <td>Rp 15,000</td>
+                    <td>Roti khas Perancis yang renyah dan lembut</td>
+                    <td>
+                        <button onclick="editProduct(this)">Edit</button>
+                        <button onclick="deleteProduct(this)">Hapus</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cupcake</td>
+                    <td>Rp 12,000</td>
+                    <td>Kue kecil dengan topping krim lezat</td>
+                    <td>
+                        <button onclick="editProduct(this)">Edit</button>
+                        <button onclick="deleteProduct(this)">Hapus</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let currentRole = '';
+
+        function setRole(role) {
+            currentRole = role;
+            alert('Anda telah memilih role: ' + role);
+        }
+
+        function editProduct(button) {
+            const row = button.parentElement.parentElement;
+            const productName = row.cells[0].innerText;
+            const newPrice = prompt('Edit Harga untuk ' + productName, row.cells[1].innerText);
+
+            if (newPrice) {
+                row.cells[1].innerText = newPrice;
+            }
+        }
+
+        function deleteProduct(button) {
+            const row = button.parentElement.parentElement;
+            const productName = row.cells[0].innerText;
+
+            if (confirm('Apakah Anda yakin ingin menghapus ' + productName + '?')) {
+                row.remove();
+            }
+        }
+    </script>
+</body>
+</html>
